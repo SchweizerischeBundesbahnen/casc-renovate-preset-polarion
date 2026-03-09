@@ -40,19 +40,21 @@
       "automerge": false
     },
     {
-      "description": "Automerge GitHub Actions updates including major versions",
+      "description": "Automerge GitHub Actions updates including major versions - group into one branch/PR",
       "matchManagers": [
         "github-actions"
       ],
-      "automerge": true
+      "automerge": true,
+      "groupName": "github-actions"
     },
     {
-      "description": "Automerge pre-commit updates including major versions (ignoreTests: low-risk tooling)",
+      "description": "Automerge pre-commit updates including major versions - group into one branch/PR (ignoreTests: low-risk tooling)",
       "matchManagers": [
         "pre-commit"
       ],
       "automerge": true,
-      "ignoreTests": true
+      "ignoreTests": true,
+      "groupName": "pre-commit hooks"
     },
     {
       "description": "Vulnerability alerts get highest priority to jump rate limit queue (prHourlyLimit/prConcurrentLimit)",
