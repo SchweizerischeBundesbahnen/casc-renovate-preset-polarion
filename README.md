@@ -31,8 +31,8 @@ All ecosystem presets extend this and inherit:
 |-------------|-------------|---------------|-------|
 | Minor/patch | ✅ Yes | 3 days | Requires CI to pass |
 | Major | ❌ No | — | Manual review required |
-| GitHub Actions (any incl. major) | ✅ Yes | 3 days | Requires CI to pass |
-| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | ignoreTests: true |
+| GitHub Actions (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
+| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR, ignoreTests: true |
 | Security vulnerabilities | ❌ No | 0 days | Labeled `security`, priority queue |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
 

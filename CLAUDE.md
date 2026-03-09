@@ -46,9 +46,11 @@ Rules are applied in order — **later rules override earlier ones**. The base p
 
 1. Automerge non-major (minor/patch/pin/digest)
 2. Block major updates (`automerge: false`)
-3. Override: github-actions — automerge all including major
-4. Override: pre-commit — automerge all including major (`ignoreTests: true`)
+3. Override: github-actions — automerge all including major, `groupName: "github-actions"` (single branch/PR)
+4. Override: pre-commit — automerge all including major, `ignoreTests: true`, `groupName: "pre-commit hooks"` (single branch/PR)
 5. Security priority (`prPriority: 99`)
+
+**Grouping rationale:** Without grouping, N separate action/hook updates create N branches that serialize: merge one → rebase others → CI reruns → repeat. Grouping collapses N updates into one branch, one CI run, one merge.
 
 Child preset rules are appended after these and can safely add more specific rules.
 
