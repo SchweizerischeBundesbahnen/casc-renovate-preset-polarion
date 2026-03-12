@@ -57,6 +57,16 @@
       "groupName": "pre-commit hooks"
     },
     {
+      "description": "Skip pinning for org-internal reusable workflows (tracked on @main intentionally)",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "SchweizerischeBundesbahnen/open-source-polarion-java-repo-template"
+      ],
+      "enabled": false
+    },
+    {
       "description": "Vulnerability alerts get highest priority to jump rate limit queue (prHourlyLimit/prConcurrentLimit)",
       "matchCategories": [
         "security"
