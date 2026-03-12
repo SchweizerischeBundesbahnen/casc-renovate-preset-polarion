@@ -35,6 +35,7 @@ All ecosystem presets extend this and inherit:
 | Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR, ignoreTests: true |
 | Security vulnerabilities | ❌ No | 0 days | Labeled `security`, priority queue |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
+| Org-internal reusable workflows | ⏭️ Skipped | — | `open-source-polarion-java-repo-template` tracked on `@main` |
 
 ---
 
