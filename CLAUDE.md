@@ -32,7 +32,7 @@ casc-renovate-preset-polarion/
 - `config:best-practices` + `:semanticCommits`
 - All top-level settings (automergeType, prCreation, internalChecksFilter, etc.)
 - `lockFileMaintenance` (Monday before 4am)
-- Automerge `packageRules`: non-major → major block → github-actions → pre-commit → security priority
+- Automerge `packageRules`: non-major → major block → github-actions → pre-commit → skip org-internal workflows → security priority
 - `osvVulnerabilityAlerts` + `vulnerabilityAlerts`
 
 **Child presets add only:**
@@ -48,7 +48,8 @@ Rules are applied in order — **later rules override earlier ones**. The base p
 2. Block major updates (`automerge: false`)
 3. Override: github-actions — automerge all including major, `groupName: "github-actions"` (single branch/PR)
 4. Override: pre-commit — automerge all including major, `ignoreTests: true`, `groupName: "pre-commit hooks"` (single branch/PR)
-5. Security priority (`prPriority: 99`)
+5. Skip: `github-workflows-polarion` — org-internal reusable workflows tracked on `@main`, disabled from Renovate
+6. Security priority (`prPriority: 99`)
 
 **Grouping rationale:** Without grouping, N separate action/hook updates create N branches that serialize: merge one → rebase others → CI reruns → repeat. Grouping collapses N updates into one branch, one CI run, one merge.
 

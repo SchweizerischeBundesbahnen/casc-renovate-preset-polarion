@@ -62,7 +62,7 @@
         "github-actions"
       ],
       "matchPackageNames": [
-        "SchweizerischeBundesbahnen/open-source-polarion-java-repo-template"
+        "SchweizerischeBundesbahnen/github-workflows-polarion"
       ],
       "enabled": false
     },
