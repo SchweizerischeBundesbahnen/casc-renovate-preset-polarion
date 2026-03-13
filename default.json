@@ -53,7 +53,6 @@
         "pre-commit"
       ],
       "automerge": true,
-      "ignoreTests": true,
       "groupName": "pre-commit hooks"
     },
     {
