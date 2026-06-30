@@ -46,6 +46,7 @@
         "^SchweizerischeBundesbahnen/ch\\.sbb\\.",
         "^SchweizerischeBundesbahnen/.+-service$",
         "^python-sbb-polarion$",
+        "^SchweizerischeBundesbahnen/python-sbb-polarion$",
         "^sbb\\.jfrog\\.io/polarion-docker/polarion/polarion$",
         "^ghcr\\.io/schweizerischebundesbahnen/.+-service$"
       ],
