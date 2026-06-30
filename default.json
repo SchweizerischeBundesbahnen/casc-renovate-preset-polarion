@@ -9,7 +9,7 @@
   "dependencyDashboard": true,
   "automergeType": "branch",
   "platformAutomerge": true,
-  "prCreation": "status-success",
+  "prCreation": "not-pending",
   "internalChecksFilter": "strict",
   "rebaseWhen": "behind-base-branch",
   "minimumReleaseAge": "3 days",
