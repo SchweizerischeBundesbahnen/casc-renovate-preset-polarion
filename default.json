@@ -52,6 +52,14 @@
       "minimumReleaseAge": "0 days"
     },
     {
+      "description": "Docker and GitHub Actions tags frequently lack a release timestamp, so under the default minimumReleaseAgeBehaviour=timestamp-required they get stuck as 'pending' status checks and never create branches/PRs. Treat them as stable without a timestamp so they flow through the automerge rules above; timestamped datasources (e.g. pypi, npm) keep the strict minimumReleaseAge wait",
+      "matchDatasources": [
+        "docker",
+        "github-tags"
+      ],
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
+    },
+    {
       "description": "Automerge GitHub Actions updates including major versions - group into one branch/PR",
       "matchManagers": [
         "github-actions"
