@@ -95,7 +95,7 @@
       "prPriority": 99
     },
     {
-      "description": "Type every dependency update `fix`. This overrides :semanticPrefixFixDepsChoreOthers, reached through config:best-practices > config:recommended, which types only runtime dependencies `fix` (Maven compile/provided/runtime/system/import/parent, pep621 and poetry project dependencies, npm dependencies) and everything else `chore` - so test-scoped Maven deps, dev dependency groups and npm devDependencies read `chore` while the identical library read `fix` elsewhere. A single type makes the dependency history uniform across every ecosystem in this estate. This MUST be a packageRule and not a top-level semanticCommitType: the upstream `chore` assignments are themselves packageRules, and a packageRule always beats top-level config. The carve-outs below must stay AFTER this rule, because packageRules are applied in array order and the last match wins.",
+      "description": "Type every dependency update `fix`. This overrides :semanticPrefixFixDepsChoreOthers, reached through config:best-practices > config:recommended, which types only runtime dependencies `fix` (Maven compile/provided/runtime/system/import/parent, pep621 and poetry project dependencies, npm dependencies) and everything else `chore` - so test-scoped Maven deps, dev dependency groups and npm devDependencies read `chore` while the identical library read `fix` elsewhere. A single type makes the dependency history uniform across every ecosystem in this estate. This MUST be a packageRule and not a top-level semanticCommitType: the upstream `chore` assignments are themselves packageRules, and a packageRule always beats top-level config. Note this rule cannot reach an update with no package name - PackageNameMatcher returns false on a falsy packageName before the `*` short-circuit - so lockFileMaintenance is untouched by it and needs no carve-out. The carve-outs below must stay AFTER this rule, because packageRules are applied in array order and the last match wins.",
       "matchPackageNames": [
         "*"
       ],
@@ -112,13 +112,6 @@
       "description": "Pre-commit hook updates stay `chore` for the same reason as the workflow actions: the hooks are commit-gate tooling and are not part of any build output.",
       "matchManagers": [
         "pre-commit"
-      ],
-      "semanticCommitType": "chore"
-    },
-    {
-      "description": "The weekly lockFileMaintenance refresh stays `chore` - it resolves transitive versions without any manifest changing, so it carries no dependency decision worth typing as a fix. Restores the upstream :semanticPrefixFixDepsChoreOthers carve-out that the `*` rule above would otherwise flip.",
-      "matchUpdateTypes": [
-        "lockFileMaintenance"
       ],
       "semanticCommitType": "chore"
     },
