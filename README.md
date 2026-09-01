@@ -18,9 +18,9 @@ All ecosystem presets extend this and inherit:
 
 - `config:best-practices` + semantic commits
 - Branch-based automerge with platform automerge enabled
-- `prCreation: not-pending` — no PR or automerge while a branch status check is still queued or running
+- `prCreation: not-pending` — no pull request while a branch status check is still queued or running
 - `internalChecksFilter: strict` — enforces `minimumReleaseAge` strictly
-- **3-day stabilization** for all updates (strictly enforced)
+- **3-day stabilization** by default, with two exceptions: internal SBB packages and images wait `0 days`, and a `docker` or `github-tags` release counts as aged when it carries no timestamp
 - Lock file maintenance every Monday before 4am (automerged)
 - OSV vulnerability alerts with `security` label and no waiting period
 - Vulnerability pull requests are prioritised and bypass the rate limits — Renovate does this natively for every alert, so this preset adds no rule for it
@@ -30,10 +30,10 @@ All ecosystem presets extend this and inherit:
 
 | Update Type | Automerged? | Stabilization | Notes |
 |-------------|-------------|---------------|-------|
-| Minor/patch | ✅ Yes | 3 days | Requires CI to pass |
+| Minor/patch | ✅ Yes | 3 days, 0 for internal SBB | Requires CI to pass |
 | Major | ❌ No | — | Manual review required |
-| GitHub Actions (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
-| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
+| GitHub Actions (any incl. major) | ✅ Yes | 3 days, none if the tag carries no timestamp | Grouped into one branch/PR |
+| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days, none if the tag carries no timestamp | Grouped into one branch/PR |
 | Security vulnerabilities | ❌ No | 0 days | Labeled `security`; Renovate prioritises these natively |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
 | Org-internal reusable workflows | ⏭️ Skipped | — | `github-workflows-polarion` tracked on `@main` |
