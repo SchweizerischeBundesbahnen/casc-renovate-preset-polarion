@@ -51,7 +51,7 @@ All ecosystem presets extend this and inherit:
 
 `fix` is a releasing type, so in a repository running release-please or a comparable tool a dependency bump now cuts a patch release. The three carve-outs are what keeps build and commit-gate tooling from doing the same.
 
-**Custom managers are typed `fix` like anything else, and deliberately have no carve-out here.** `ManagersMatcher` compares a custom manager as `custom.regex`, so it matches neither the `github-actions` nor the `pre-commit` carve-out. That is the correct outcome wherever a custom manager tracks something the product ships — a pinned tool version in a `Dockerfile`, a wheel or model URL in `pyproject.toml`, a service version in `versions.properties` — which is the majority of their use in this estate. Where a repository instead uses one for a CI-only value, such as the `TC_*` system-test versions or a pinned image tag in a workflow, add the carve-out in that repository:
+**Custom managers are typed `fix` like anything else, and deliberately have no carve-out here.** `ManagersMatcher` compares a custom manager as `custom.regex`, so it matches neither the `github-actions` nor the `pre-commit` carve-out. That is the correct outcome wherever a custom manager tracks something the product ships — a pinned tool version in a `Dockerfile`, a wheel or model URL in `pyproject.toml`, a service version in `versions.properties` — which is about half of their use in this estate. Where a repository instead uses one for a CI-only value, such as the `TC_*` system-test versions or a pinned image tag in a workflow, add the carve-out in that repository:
 
 ```json
 {
