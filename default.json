@@ -70,7 +70,7 @@
       "groupName": "github-actions"
     },
     {
-      "description": "Automerge pre-commit updates including major versions - group into one branch/PR (ignoreTests: low-risk tooling)",
+      "description": "Automerge pre-commit updates including major versions - group into one branch/PR",
       "matchManagers": [
         "pre-commit"
       ],
