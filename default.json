@@ -109,7 +109,7 @@
       "semanticCommitType": "chore"
     },
     {
-      "description": "Same for a lock-file-only update of a dependency whose declared range already allowed the new version - the manifest is untouched. Restores the second half of the upstream carve-out.",
+      "description": "Same for a lock-file-only update of a dependency whose declared range already allowed the new version - the manifest is untouched. This restores the one lockfile carve-out :semanticPrefixFixDepsChoreOthers actually has - its rules are `*` to chore, four matchDepTypes rules to fix, and this one. There is no lockFileMaintenance rule upstream and none is needed here either, because that update carries no package name and the `*` rule above cannot reach it.",
       "matchJsonata": [
         "isLockfileUpdate = true"
       ],
