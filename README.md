@@ -18,24 +18,50 @@ All ecosystem presets extend this and inherit:
 
 - `config:best-practices` + semantic commits
 - Branch-based automerge with platform automerge enabled
-- `prCreation: status-success` — PRs created only after CI passes
+- `prCreation: not-pending` — no pull request while a branch status check is still queued or running
 - `internalChecksFilter: strict` — enforces `minimumReleaseAge` strictly
-- **3-day stabilization** for all updates (strictly enforced)
+- **3-day stabilization** by default, with two exceptions: internal SBB packages and images wait `0 days`, and a `docker` or `github-tags` release counts as aged when it carries no timestamp
 - Lock file maintenance every Monday before 4am (automerged)
 - OSV vulnerability alerts with `security` label and no waiting period
-- Security PRs get `prPriority: 99` to jump the rate limit queue
+- Vulnerability pull requests are prioritised and bypass the rate limits — Renovate does this natively for every alert, so this preset adds no rule for it
+- Every dependency update is typed `fix`, except workflow actions, pre-commit hooks and lock-file updates, which stay `chore`
 
 ### Automerge Rules (inherited by all presets)
 
 | Update Type | Automerged? | Stabilization | Notes |
 |-------------|-------------|---------------|-------|
-| Minor/patch | ✅ Yes | 3 days | Requires CI to pass |
+| Minor/patch | ✅ Yes | 3 days, 0 for internal SBB | Requires CI to pass |
 | Major | ❌ No | — | Manual review required |
-| GitHub Actions (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
-| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR, ignoreTests: true |
-| Security vulnerabilities | ❌ No | 0 days | Labeled `security`, priority queue |
+| GitHub Actions (any incl. major) | ✅ Yes | 3 days, none if the tag carries no timestamp | Grouped into one branch/PR |
+| Pre-commit hooks (any incl. major) | ✅ Yes | 3 days, none if the tag carries no timestamp | Grouped into one branch/PR |
+| Security vulnerabilities | ❌ No | 0 days | Labeled `security`; Renovate prioritises these natively |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
 | Org-internal reusable workflows | ⏭️ Skipped | — | `github-workflows-polarion` tracked on `@main` |
+
+### Semantic Commit Types
+
+`fix` for every dependency update, so the type does not depend on which dependency section a package happens to sit in. Upstream `:semanticPrefixFixDepsChoreOthers` types only runtime dependencies `fix`, which left Maven `test` scope, dev dependency groups and npm `devDependencies` reading `chore` for the same library.
+
+| Update | Type |
+|--------|------|
+| Any dependency | `fix` |
+| GitHub Actions | `chore` |
+| Pre-commit hooks | `chore` |
+| Lock file maintenance, lock-file-only updates | `chore` |
+
+`fix` is a releasing type, so in a repository running release-please or a comparable tool a dependency bump now cuts a patch release. The three carve-outs are what keeps build and commit-gate tooling from doing the same.
+
+**Custom managers are typed `fix` like anything else, and deliberately have no carve-out here.** `ManagersMatcher` compares a custom manager as `custom.regex`, so it matches neither the `github-actions` nor the `pre-commit` carve-out. That is the correct outcome wherever a custom manager tracks something the product ships — a pinned tool version in a `Dockerfile`, a wheel or model URL in `pyproject.toml`, a service version in `versions.properties` — which is about half of their use in this estate. Where a repository instead uses one for a CI-only value, such as the `TC_*` system-test versions or a pinned image tag in a workflow, add the carve-out in that repository:
+
+```json
+{
+  "description": "CI-only custom-manager bumps stay chore",
+  "matchManagers": ["custom.regex"],
+  "semanticCommitType": "chore"
+}
+```
+
+It belongs there rather than in this preset, because a blanket carve-out would mistype every runtime case above.
 
 ---
 
