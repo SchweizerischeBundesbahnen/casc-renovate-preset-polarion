@@ -23,7 +23,7 @@ All ecosystem presets extend this and inherit:
 - **3-day stabilization** for all updates (strictly enforced)
 - Lock file maintenance every Monday before 4am (automerged)
 - OSV vulnerability alerts with `security` label and no waiting period
-- Security PRs get `prPriority: 99` to jump the rate limit queue
+- Vulnerability pull requests are prioritised and bypass the rate limits — Renovate does this natively for every alert, so this preset adds no rule for it
 - Every dependency update is typed `fix`, except workflow actions, pre-commit hooks and lock-file updates, which stay `chore`
 
 ### Automerge Rules (inherited by all presets)
@@ -34,7 +34,7 @@ All ecosystem presets extend this and inherit:
 | Major | ❌ No | — | Manual review required |
 | GitHub Actions (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
 | Pre-commit hooks (any incl. major) | ✅ Yes | 3 days | Grouped into one branch/PR |
-| Security vulnerabilities | ❌ No | 0 days | Labeled `security`, priority queue |
+| Security vulnerabilities | ❌ No | 0 days | Labeled `security`; Renovate prioritises these natively |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
 | Org-internal reusable workflows | ⏭️ Skipped | — | `github-workflows-polarion` tracked on `@main` |
 
