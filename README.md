@@ -37,6 +37,7 @@ All ecosystem presets extend this and inherit:
 | Security vulnerabilities | ❌ No | 0 days | Labeled `security`; Renovate prioritises these natively |
 | Lock file maintenance | ✅ Yes | — | Monday before 4am |
 | Org-internal reusable workflows | ⏭️ Skipped | — | `github-workflows-polarion` tracked on `@main` |
+| vitest and `vitest-browser-react` | Per update type | 3 days | Grouped into one branch/PR; their peer dependency pins an exact vitest major |
 
 ### Semantic Commit Types
 
