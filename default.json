@@ -88,6 +88,13 @@
       "enabled": false
     },
     {
+      "description": "vitest-browser-react must move in the same branch as the vitest monorepo. It declares a peer dependency on an exact vitest major, so a vitest major update that leaves it behind makes the tree unresolvable: npm refuses the peer set, Renovate cannot regenerate the lock file, and the pull request lands with the manifest bumped and package-lock.json untouched, which fails every `npm ci`. The vitest 4 to 5 update did exactly that across this estate. Renovate's own monorepo grouping cannot cover the package, because it is published outside vitest-dev/vitest.",
+      "matchPackageNames": [
+        "vitest-browser-react"
+      ],
+      "groupName": "vitest monorepo"
+    },
+    {
       "description": "Type every dependency update `fix`. This overrides :semanticPrefixFixDepsChoreOthers, reached through config:best-practices > config:recommended, which types only runtime dependencies `fix` (Maven compile/provided/runtime/system/import/parent, pep621 and poetry project dependencies, npm dependencies) and everything else `chore` - so test-scoped Maven deps, dev dependency groups and npm devDependencies read `chore` while the identical library read `fix` elsewhere. A single type makes the dependency history uniform across every ecosystem in this estate. This MUST be a packageRule and not a top-level semanticCommitType: the upstream `chore` assignments are themselves packageRules, and a packageRule always beats top-level config. Note this rule cannot reach an update with no package name - PackageNameMatcher returns false on a falsy packageName before the `*` short-circuit - so lockFileMaintenance is untouched by it and needs no carve-out. The carve-outs below must stay AFTER this rule, because packageRules are applied in array order and the last match wins.",
       "matchPackageNames": [
         "*"
