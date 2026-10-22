@@ -23,6 +23,7 @@ All ecosystem presets extend this and inherit:
 - **3-day stabilization** by default, with two exceptions: internal SBB packages and images wait `0 days`, and a `docker` or `github-tags` release counts as aged when it carries no timestamp
 - Lock file maintenance every Monday before 4am (automerged)
 - OSV vulnerability alerts with `security` label and no waiting period
+- The Dependency Dashboard lists known vulnerabilities in direct dependencies that have no fixed version yet (`dependencyDashboardOSVVulnerabilitySummary: unresolved`), so they are visible before a fix pull request can exist
 - Vulnerability pull requests are prioritised and bypass the rate limits — Renovate does this natively for every alert, so this preset adds no rule for it
 - Every dependency update is typed `fix`, except workflow actions, pre-commit hooks and lock-file updates, which stay `chore`
 

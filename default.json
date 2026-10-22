@@ -124,6 +124,7 @@
     }
   ],
   "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "unresolved",
   "vulnerabilityAlerts": {
     "enabled": true,
     "labels": [

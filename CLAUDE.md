@@ -35,6 +35,7 @@ casc-renovate-preset-polarion/
 - Automerge and grouping `packageRules`: non-major → major block → internal-SBB stability skip → docker/github-tags timestamp-optional → github-actions → pre-commit → skip org-internal workflows → vitest monorepo
 - Semantic-commit-type `packageRules`: catch-all `fix` → chore carve-outs for github-actions, pre-commit and lock-file-only updates
 - `osvVulnerabilityAlerts` + `vulnerabilityAlerts`
+- `dependencyDashboardOSVVulnerabilitySummary: "unresolved"` — lists OSV vulnerabilities without a fix in the Dependency Dashboard; direct dependencies only, OS packages in images are not covered
 
 **Child presets add only:**
 - `enabledManagers` (ecosystem-specific)
